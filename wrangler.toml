@@ -1,0 +1,6 @@
+name = "api-quote-of-the-day"
+main = "dist/index.js"
+compatibility_date = "2025-06-14"
+
+[build]
+command = "bun run build"

@@ -7,4 +7,15 @@ Built with [Bun](https://bun.sh/) and [Hono](https://hono.dev/) for performance 
 
 - **Runtime:** [Bun](https://bun.sh/)
 - **Framework:** [Hono](https://hono.dev/)
-- **Language:** TypeScript
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+
+## Getting Started
+
+1. Clone the repository  
+2. Run `bun install`  
+3. Start the server with `bun start`  
+4. Visit `http://localhost:3000/quote`
+
+## License
+
+MIT License
