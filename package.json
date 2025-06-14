@@ -11,6 +11,14 @@
     "dev": "bun --hot src/index.ts",
     "test": "bun test"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/william-stell/quote-of-the-day-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/william-stell/quote-of-the-day-api/issues"
+  },
+  "homepage": "https://github.com/william-stell/quote-of-the-day-api#readme",
   "devDependencies": {
     "@types/bun": "latest"
   },
