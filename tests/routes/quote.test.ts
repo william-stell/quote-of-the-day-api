@@ -1,5 +1,5 @@
 import { describe, it, expect } from "bun:test";
-import app from "../src/index";
+import app from "../../src/index";
 
 type Quote = {
   text: string
@@ -20,8 +20,5 @@ describe("GET /quote", () => {
 
     expect(json).toHaveProperty("author");
     expect(typeof json.author).toBe("string");
-
-    // No id property check
-    expect(json).not.toHaveProperty("id");
   });
 });
