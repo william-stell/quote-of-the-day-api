@@ -1,0 +1,23 @@
+{
+  "name": "quote-of-the-day-api",
+  "version": "0.1.0",
+  "description": "A fast REST API that returns a daily quote using Bun + Hono.",
+  "author": "William Stell",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "bun src/index.ts",
+    "dev": "bun --hot src/index.ts",
+    "test": "bun test"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "hono": "^4.7.11"
+  }
+}
