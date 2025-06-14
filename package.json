@@ -1,6 +1,6 @@
 {
   "name": "quote-of-the-day-api",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A fast REST API that returns a daily quote using Bun + Hono.",
   "author": "William Stell",
   "type": "module",
