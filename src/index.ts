@@ -1,7 +1,15 @@
-import { Hono } from 'hono'
+import { Hono } from "hono";
 
-const app = new Hono()
+const app = new Hono();
 
-app.get('/', (c) => c.text('Quote of the Day API is running'))
+app.get("/", (c) => c.text("Quote of the Day API is running"));
 
-export default app
+app.get("/quote", (c) => {
+  const quote = {
+    text: "This is a quote",
+    author: "John Smith",
+  };
+  return c.json(quote);
+});
+
+export default app;
