@@ -1,11 +1,8 @@
 import { Hono } from "hono";
-import { quoteGet } from "../controllers/quoteController";
+import { quoteControllerGet } from "../controllers/quoteController";
 
 const quoteRouter = new Hono();
 
-quoteRouter.get("/quote", (c) => {
-  const quote = quoteGet();
-  return c.json(quote);
-});
+quoteRouter.get("/quote", quoteControllerGet);
 
 export default quoteRouter;

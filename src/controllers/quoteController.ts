@@ -1,23 +1,19 @@
-import type { Quote } from "../types";
+import type { Context } from "hono";
+import { quoteGet } from "../services/quoteService";
 
-const quotes: Quote[] = [
-  { text: "This is a quote", author: "John Smith" },
-  { text: "Another placeholder quote", author: "Jane Doe" },
-  { text: "Yet another quote here", author: "Alex Johnson" },
-  { text: "Placeholder quote number four", author: "Chris Lee" },
-  { text: "Final placeholder quote", author: "Pat Taylor" },
-];
-
-let quote: Quote = quotes[0]!;
-let lastGenerated: number = 0;
-
-export function quoteGet(): Quote {
-  const now = Date.now();
-
-  if (now - lastGenerated > 24 * 60 * 60 * 1000) {
-    quote = quotes[Math.floor(Math.random() * quotes.length)]!;
-    lastGenerated = now;
+/**
+ * Handles the HTTP GET request for the quote endpoint.
+ * Retrieves the current cached quote and returns it as JSON.
+ * If an error occurs, responds with a 500 status and error message.
+ *
+ * @param {Context} c - The Hono context object for the request/response lifecycle.
+ * @returns {Response} JSON response containing the quote or an error message.
+ */
+export function quoteControllerGet(c: Context): Response {
+  try {
+    const quote = quoteGet();
+    return c.json(quote);
+  } catch (error) {
+    return c.json({ error: "Failed to get quote" }, 500);
   }
-
-  return quote;
 }
