@@ -1,12 +1,27 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it, expect, beforeEach, afterEach } from "bun:test";
 import app from "../../src/index";
 
 type Quote = {
-  text: string
-  author: string
-}
+  text: string;
+  author: string;
+};
 
 describe("GET /quote", () => {
+  let originalDateNow: () => number;
+  let now: number;
+
+  beforeEach(() => {
+    // Save original Date.now and mock it
+    originalDateNow = Date.now;
+    now = originalDateNow();
+    Date.now = () => now;
+  });
+
+  afterEach(() => {
+    // Restore original Date.now after each test
+    Date.now = originalDateNow;
+  });
+
   it("returns a quote object", async () => {
     const request = new Request("http://localhost/quote");
     const response = await app.fetch(request);
@@ -20,5 +35,43 @@ describe("GET /quote", () => {
 
     expect(json).toHaveProperty("author");
     expect(typeof json.author).toBe("string");
+  });
+
+  it("returns the same quote within 24 hours", async () => {
+    // First request at time `now`
+    const firstRequest = new Request("http://localhost/quote");
+    const firstResponse = await app.fetch(firstRequest);
+    const firstJson = (await firstResponse.json()) as Quote;
+
+    // Advance time by 23 hours
+    now += 23 * 60 * 60 * 1000;
+
+    // Second request within 24 hours
+    const secondRequest = new Request("http://localhost/quote");
+    const secondResponse = await app.fetch(secondRequest);
+    const secondJson = (await secondResponse.json()) as Quote;
+
+    expect(secondJson).toEqual(firstJson);
+  });
+
+  it("returns a different quote after 24 hours", async () => {
+    // First request at time `now`
+    const firstRequest = new Request("http://localhost/quote");
+    const firstResponse = await app.fetch(firstRequest);
+    const firstJson = (await firstResponse.json()) as Quote;
+
+    // Advance time by 25 hours
+    now += 25 * 60 * 60 * 1000;
+
+    // Second request after 24 hours
+    const secondRequest = new Request("http://localhost/quote");
+    const secondResponse = await app.fetch(secondRequest);
+    const secondJson = (await secondResponse.json()) as Quote;
+
+    expect(secondJson).toHaveProperty("text");
+    expect(secondJson).toHaveProperty("author");
+
+    // It's possible to get the same quote by chance, so this is optional:
+    expect(secondJson).not.toEqual(firstJson);
   });
 });
