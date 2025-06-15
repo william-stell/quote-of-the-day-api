@@ -1,7 +1,4 @@
-interface Quote {
-  text: string;
-  author: string;
-}
+import type { Quote } from "../types";
 
 const quotes: Quote[] = [
   { text: "This is a quote", author: "John Smith" },

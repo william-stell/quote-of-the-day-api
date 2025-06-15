@@ -1,10 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from "bun:test";
 import app from "../../src/index";
 
-type Quote = {
-  text: string;
-  author: string;
-};
+import type { Quote } from "../../src/types";
 
 describe("GET /quote", () => {
   let originalDateNow: () => number;
