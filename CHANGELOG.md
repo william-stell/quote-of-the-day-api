@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.1] - 2025-06-15
+### Fixed
+- Fix quote endpoint to return the same quote for 24 hours as intended.
+
 ## [0.2.0] - 2025-06-14
 ### Added
 - Initial quote route `/quote` returning a fixed quote.
